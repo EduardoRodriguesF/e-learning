@@ -1,11 +1,16 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+
+import SearchBox from '../../components/SearchBox';
+
+import { Container, Header } from './styles';
 
 const Dashboard: React.FC = () => {
   return (
-    <View>      
-      <Text>Dashboard</Text>
-    </View>
+    <Container>      
+      <Header>
+        <SearchBox />
+      </Header>
+    </Container>
   )
 }
 

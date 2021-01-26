@@ -7,5 +7,12 @@ export const Container = styled.View`
 
 export const Header = styled.View`
   width: 100%;
-  padding: 60px 21px;
+  padding: 32px 21px;
+`;
+
+export const TopHeader = styled.View`
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 32px 0;
 `;

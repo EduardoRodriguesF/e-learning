@@ -1,17 +1,33 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Image, FlatList } from 'react-native';
+import { Image, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 
 import SearchBox from '../../components/SearchBox';
 import Content from '../../components/Content';
-import CourseCard from '../../components/CourseCard';
 
 import logoImg from '../../assets/logo.png';
 
 import api from '../../services/api';
 
-import { Container, Header, TopHeader, ContentHeader, Title, CoursesText, CoursesContainer, NavigationBar, NavigationOption, NavigationText } from './styles';
+import {
+  Container,
+  Header,
+  TopHeader,
+  ContentHeader,
+  Title,
+  CoursesText,
+  CoursesContainer,
+  CourseCard,
+  CourseImage,
+  CourseTitle,
+  LessonsText,
+  NavigationBar,
+  NavigationOption,
+  NavigationText
+} from './styles';
 
+import Maths from '../../assets/maths.png';
 interface Course {
   id: number;
   title: string;
@@ -23,9 +39,17 @@ interface Course {
 const Dashboard: React.FC = () => {
   const [courses, setCourses] = useState<Course[]>([]);
 
+  const navigation = useNavigation();
+
+  const handleNavigation = useCallback((id: number) => {
+    navigation.navigate('Course', { id });
+  }, [navigation]);
+
   useEffect(() => {
     async function loadCourses(): Promise<void> {
       const { data } = await api.get('/courses');
+
+      console.log(data)
 
       setCourses(data);
     }
@@ -49,7 +73,13 @@ const Dashboard: React.FC = () => {
         </ContentHeader>
         <CoursesContainer>
           {courses.map(c => (
-            <CourseCard key={c.id} title={c.title} lessons={c.lessons.length} cover={c.cover} />
+            <CourseCard key={c.id} onPress={() => handleNavigation(c.id)}>
+              <CourseImage source={Maths} />
+              <View>
+                <CourseTitle>{c.title}</CourseTitle>
+                <LessonsText>{c.lessons.length} Aulas</LessonsText>
+              </View>
+            </CourseCard>
           ))}
         </CoursesContainer>
       </Content>

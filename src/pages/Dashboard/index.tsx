@@ -45,7 +45,7 @@ const Dashboard: React.FC = () => {
       <Content>
         <ContentHeader>
           <Title>Categorias</Title>
-          <CoursesText>43 cursos</CoursesText>
+          <CoursesText>{courses.length} cursos</CoursesText>
         </ContentHeader>
         <CoursesContainer>
           {courses.map(c => (

@@ -48,9 +48,7 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     async function loadCourses(): Promise<void> {
       const { data } = await api.get('/courses');
-
-      console.log(data)
-
+      
       setCourses(data);
     }
 

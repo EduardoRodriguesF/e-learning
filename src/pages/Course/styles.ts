@@ -2,6 +2,10 @@ import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Feather';
 
+interface CompletedProps {
+  isCompleted: boolean;
+}
+
 export const Container = styled.View`
   flex: 1;
   align-items: center;
@@ -46,7 +50,7 @@ export const LessonCard = styled.View`
   margin-bottom: 16px;
 `;
 
-export const PlayButton = styled(RectButton)`
+export const PlayButton = styled(RectButton)<CompletedProps>`
   position: relative;
   z-index: 1;
   margin-top: 16px;
@@ -54,7 +58,7 @@ export const PlayButton = styled(RectButton)`
   height: 68px;
   margin-right: -32px;
   border-radius: 16px;
-  background-color: #61C5BD;
+  background-color: ${props => props.isCompleted ? '#61C5BD' : '#FF6680'};
   align-items: center;
   justify-content: center;
 `;
@@ -87,4 +91,17 @@ export const LessonDetailText = styled.Text`
 
 export const Clock = styled(Icon)`
   margin-right: 4px;
+`;
+
+export const CompletedBadge = styled.View<CompletedProps>`
+  opacity: ${props => props.isCompleted ? 1 : 0};
+  background-color: #61C5BD;
+  margin-left: auto;
+  padding: 3px 8px;
+  border-radius: 100px;
+`;
+
+export const CompletedText = styled.Text`
+  color: #fff;
+  font-size: 10px;
 `;

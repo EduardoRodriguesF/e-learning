@@ -21,6 +21,8 @@ import {
   LessonDetails,
   LessonDetailText,
   Clock,
+  CompletedBadge,
+  CompletedText,
 } from './styles';
 
 import logoImg from '../../assets/logo.png';
@@ -33,7 +35,8 @@ interface Course {
   title: string;
   lessons: {
     id: number;
-    title: string; 
+    title: string;
+    completed: boolean; 
   }[];
 }
 
@@ -68,9 +71,9 @@ const Course: React.FC = () => {
           <LessonsText>{course.lessons && course.lessons.length} aulas</LessonsText>
         </ContentHeader>
         <LessonsContainer>
-          {course.lessons.map(l => (
+          {course.lessons && course.lessons.map(l => (
             <LessonCard key={l.id}>
-              <PlayButton>
+              <PlayButton isCompleted={l.completed}>
                 <Icon name="play-circle" size={40} color="#fff" />
               </PlayButton>
               <LessonInfo>
@@ -79,6 +82,9 @@ const Course: React.FC = () => {
                   <LessonDetailText>Aula 01</LessonDetailText>
                   <Clock name="clock" size={12} color="#C4C4D1" />
                   <LessonDetailText>5 min</LessonDetailText>
+                  <CompletedBadge isCompleted={l.completed}>
+                    <CompletedText>Completo!</CompletedText>
+                  </CompletedBadge>
                 </LessonDetails>
               </LessonInfo>
             </LessonCard>

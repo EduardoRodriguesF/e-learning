@@ -73,17 +73,27 @@
       "lessons": [
         {
           "id": 1,
-          "title": "Introdução à teoria matemática",
+          "title": "Leis de Newton I",
           "completed": true
         },
         {
           "id": 2,
-          "title": "Introdução à teoria matemática",
+          "title": "Leis de Newton II",
           "completed": true
         },
         {
           "id": 3,
-          "title": "Introdução à teoria matemática",
+          "title": "Leis de Newton III",
+          "completed": false
+        },
+        {
+          "id": 4,
+          "title": "Teoria da Relatividade",
+          "completed": false
+        },
+        {
+          "id": 5,
+          "title": "Elétrica",
           "completed": false
         }
       ]

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Text, View, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
@@ -48,6 +48,11 @@ const Course: React.FC = () => {
 
   const routeParams = route.params as Params;
 
+  const lessonNumber = useCallback((id: number) => {
+    if (id < 10) return `0${id}`;
+    else return id;
+  }, []);
+
   useEffect(() => {
     async function loadCourse() {
       const { data } = await api.get(`/courses/${routeParams.id}`);
@@ -79,7 +84,7 @@ const Course: React.FC = () => {
               <LessonInfo>
                 <LessonTitle>{l.title}</LessonTitle>
                 <LessonDetails>
-                  <LessonDetailText>Aula 01</LessonDetailText>
+                  <LessonDetailText>Aula {lessonNumber(l.id)}</LessonDetailText>
                   <Clock name="clock" size={12} color="#C4C4D1" />
                   <LessonDetailText>5 min</LessonDetailText>
                   <CompletedBadge isCompleted={l.completed}>

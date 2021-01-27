@@ -3,6 +3,8 @@ import { View } from 'react-native';
 
 import { Container, Image, Title, LessonsText } from './styles';
 
+import Maths from '../../assets/maths.png';
+
 interface ICourseCard {
   title: string;
   lessons: string;
@@ -12,7 +14,7 @@ interface ICourseCard {
 const CourseCard: React.FC<ICourseCard> = ({ title, lessons, cover })  => {
   return (
     <Container>
-      <Image source={cover} />
+      <Image source={Maths} />
       <View>
         <Title>{title}</Title>
         <LessonsText>{lessons} Aulas</LessonsText>

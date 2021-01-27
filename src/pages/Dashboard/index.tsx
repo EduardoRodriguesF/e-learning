@@ -10,7 +10,7 @@ import logoImg from '../../assets/logo.png';
 
 import api from '../../services/api';
 
-import { Container, Header, TopHeader, ContentHeader, Title, CoursesText, CoursesContainer } from './styles';
+import { Container, Header, TopHeader, ContentHeader, Title, CoursesText, CoursesContainer, NavigationBar, NavigationOption, NavigationText } from './styles';
 
 interface Course {
   id: number;
@@ -53,6 +53,14 @@ const Dashboard: React.FC = () => {
           ))}
         </CoursesContainer>
       </Content>
+      <NavigationBar>
+        <NavigationOption>
+          <Icon name="home" size={20} color="#C4C4D1" /><NavigationText>Home</NavigationText>
+        </NavigationOption>
+        <NavigationOption>
+          <Icon name="heart" size={20} color="#C4C4D1" /><NavigationText>Salvos</NavigationText>
+        </NavigationOption>
+      </NavigationBar>
     </Container>
   )
 }

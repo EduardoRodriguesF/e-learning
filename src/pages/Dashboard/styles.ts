@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { RectButton } from 'react-native-gesture-handler';
 
 export const Container = styled.View`
   flex: 1;
@@ -40,4 +41,29 @@ export const CoursesContainer = styled.View`
   flex: 1;
   flex-direction: row;
   flex-wrap: wrap;
+`;
+
+export const NavigationBar = styled.View`
+  position: relative;
+  bottom: 0;
+  flex-direction: row;
+  width: 100%;
+  background-color: #fff;
+  border-top-width: 1px;
+  border-top-color: #F0EDF5;
+`;
+
+export const NavigationOption = styled(RectButton)`
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const NavigationText = styled.Text`
+  text-align: center;
+  margin-left: 12px;
+  color: #C4C4D1;
+  font-size: 15px;
+  padding: 20px 0;
 `;

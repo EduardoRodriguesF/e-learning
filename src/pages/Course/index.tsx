@@ -48,6 +48,10 @@ const Course: React.FC = () => {
 
   const routeParams = route.params as Params;
 
+  const handleNavigation = useCallback((id: number) => {
+    navigation.navigate('Lesson', { courseId: routeParams.id, id });
+  }, [navigation]);
+
   const lessonNumber = useCallback((id: number) => {
     if (id < 10) return `0${id}`;
     else return id;
@@ -77,11 +81,11 @@ const Course: React.FC = () => {
         </ContentHeader>
         <LessonsContainer>
           {course.lessons && course.lessons.map(l => (
-            <LessonCard key={l.id}>
-              <PlayButton isCompleted={l.completed}>
+            <LessonCard key={l.id} onPress={() => handleNavigation(l.id)}>
+              <PlayButton isCompleted={l.completed} onPress={() => handleNavigation(l.id)}>
                 <Icon name="play-circle" size={40} color="#fff" />
               </PlayButton>
-              <LessonInfo>
+              <LessonInfo onPress={() => handleNavigation(l.id)}>
                 <LessonTitle>{l.title}</LessonTitle>
                 <LessonDetails>
                   <LessonDetailText>Aula {lessonNumber(l.id)}</LessonDetailText>

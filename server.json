@@ -74,6 +74,7 @@
         {
           "id": 1,
           "title": "Leis de Newton I",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam luctus condimentum gravida. Aenean condimentum vehicula sapien, eleifend metus congue vel.\n Suspendisse vitae tellus eu lacus facilisis auctor nec tristique eros.",
           "completed": true
         },
         {

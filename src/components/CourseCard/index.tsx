@@ -6,14 +6,13 @@ import { Container, Image, Title, LessonsText } from './styles';
 interface ICourseCard {
   title: string;
   lessons: string;
+  cover: string;
 }
 
-import Maths from '../../assets/maths.png';
-
-const CourseCard: React.FC<ICourseCard> = ({ title, lessons })  => {
+const CourseCard: React.FC<ICourseCard> = ({ title, lessons, cover })  => {
   return (
     <Container>
-      <Image source={Maths} />
+      <Image source={cover} />
       <View>
         <Title>{title}</Title>
         <LessonsText>{lessons} Aulas</LessonsText>

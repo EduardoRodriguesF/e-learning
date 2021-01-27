@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Image, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -8,46 +8,29 @@ import CourseCard from '../../components/CourseCard';
 
 import logoImg from '../../assets/logo.png';
 
+import api from '../../services/api';
+
 import { Container, Header, TopHeader, ContentHeader, Title, CoursesText, CoursesContainer } from './styles';
 
-const courses = [
-  {
-    id: 0,
-    title: 'Matemática',
-    lessons: '16',
-  },
-  {
-    id: 1,
-    title: 'Matemática',
-    lessons: '16',
-  },
-  {
-    id: 2,
-    title: 'Matemática',
-    lessons: '16',
-  },
-  {
-    id: 3,
-    title: 'Matemática',
-    lessons: '16',
-  },
-  {
-    id: 4,
-    title: 'Matemática',
-    lessons: '16',
-  },
-  {
-    id: 5,
-    title: 'Matemática',
-    lessons: '16',
-  },
-]
+interface Course {
+  id: number;
+  title: string;
+  cover: string; 
+
+  lessons: any;
+}
 
 const Dashboard: React.FC = () => {
-  const renderCourse = useCallback((item) => {
-    return (
-      <CourseCard key={item.id} title={item.title} lessons={item.lessons} />
-    )
+  const [courses, setCourses] = useState<Course[]>([]);
+
+  useEffect(() => {
+    async function loadCourses(): Promise<void> {
+      const { data } = await api.get('/courses');
+
+      setCourses(data);
+    }
+
+    loadCourses();
   }, []);
 
   return (
@@ -65,7 +48,9 @@ const Dashboard: React.FC = () => {
           <CoursesText>43 cursos</CoursesText>
         </ContentHeader>
         <CoursesContainer>
-          {courses.map(c => renderCourse(c))}
+          {courses.map(c => (
+            <CourseCard key={c.id} title={c.title} lessons={c.lessons.length} cover={c.cover} />
+          ))}
         </CoursesContainer>
       </Content>
     </Container>

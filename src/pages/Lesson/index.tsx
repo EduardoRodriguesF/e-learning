@@ -38,6 +38,7 @@ interface Lesson {
 
 const Lesson: React.FC = () => {
   const [lesson, setLesson] = useState({} as Lesson);
+  const [maxLessons, setMaxLessons] = useState(0);
 
   const navigation = useNavigation();
   const route = useRoute();
@@ -60,6 +61,7 @@ const Lesson: React.FC = () => {
       const dataLesson = data.lessons[routeParams.id - 1];
 
       setLesson(dataLesson);
+      setMaxLessons(data.lessons.length);
     }
 
     loadCourse();
@@ -86,14 +88,14 @@ const Lesson: React.FC = () => {
           <Description>{lesson.description || '(Nenhuma descrição)'}</Description>
         </LessonDetails>
         <LessonsNavigation>
-          <PreviousButton onPress={() => handleNavigation(Number(lesson.id) - 1)}>
+          {(Number(lesson.id) > 1) && <PreviousButton onPress={() => handleNavigation(Number(lesson.id) - 1)}>
             <Icon name="arrow-left" size={20} color="#FF6680" />
             <PreviousButtonText>Aula anterior</PreviousButtonText>
-          </PreviousButton>
-          <NextButton onPress={() => handleNavigation(Number(lesson.id) + 1)}>
+          </PreviousButton>}
+          {(Number(lesson.id) < maxLessons) && <NextButton onPress={() => handleNavigation(Number(lesson.id) + 1)}>
             <NextButtonText>Próxima aula</NextButtonText>
             <Icon name="arrow-right" size={20} color="#fff" />
-          </NextButton>
+          </NextButton>}
         </LessonsNavigation>
       </Content>
     </Container>

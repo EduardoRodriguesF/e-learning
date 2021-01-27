@@ -93,6 +93,7 @@ export const NextButton = styled(RectButton)`
   height: 56px;
   background-color: #FF6680;
   border-radius: 100px;
+  margin-left: auto;
 `;
 
 export const NextButtonText = styled.Text`

@@ -80,8 +80,10 @@ const Favorites: React.FC = () => {
   }, []); 
 
   useEffect(() => {
-    loadCourses();
-  }, []);
+    navigation.addListener('focus', () => {
+      loadCourses();
+    });
+  }, [navigation]);
 
   return (
     <Container>      

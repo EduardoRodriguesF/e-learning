@@ -1,7 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Text, View, Image } from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
+import IconF from 'react-native-vector-icons/Feather';
+import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import api from '../../services/api';
 
@@ -42,6 +43,7 @@ interface Course {
 
 const Course: React.FC = () => {
   const [course, setCourse] = useState({} as Course);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const navigation = useNavigation();
   const route = useRoute();
@@ -57,9 +59,29 @@ const Course: React.FC = () => {
     else return id;
   }, []);
 
+  const toggleFavorite = useCallback(async () => {
+    if (!isFavorite) {
+      await api.post('/favorites/', course).then(() => {
+        setIsFavorite(true);
+      })
+    } else {
+      await api.delete(`/favorites/${course.id}`).then(() => {
+        setIsFavorite(false);
+      });
+    }
+  }, [isFavorite, course]);
+
   useEffect(() => {
     async function loadCourse() {
       const { data } = await api.get(`/courses/${routeParams.id}`);
+
+      const favorite = await api.get(`/favorites`, {
+        params: {
+          id: routeParams.id,
+        }
+      });
+
+      if (!!favorite.data.length) setIsFavorite(true);
 
       setCourse(data);
     }
@@ -67,12 +89,17 @@ const Course: React.FC = () => {
     loadCourse();
   }, [routeParams]);
 
+  const favoriteIconName = useMemo(
+    () => (isFavorite ? 'heart' : 'heart-outline'),
+    [isFavorite],
+  );
+
   return (
     <Container>
       <Header>
-        <Icon onPress={() => navigation.goBack()} name="arrow-left" size={24} color="#FF6680" />
+        <IconF onPress={() => navigation.goBack()} name="arrow-left" size={24} color="#FF6680" />
         <Image source={logoImg} />
-        <Icon name="heart" size={24} color="#FF6680" />
+        <IconM onPress={toggleFavorite} name={favoriteIconName} size={24} color="#FF6680" />
       </Header>
       <Content>
         <ContentHeader>
@@ -83,7 +110,7 @@ const Course: React.FC = () => {
           {course.lessons && course.lessons.map(l => (
             <LessonCard key={l.id} onPress={() => handleNavigation(l.id)}>
               <PlayButton isCompleted={l.completed} onPress={() => handleNavigation(l.id)}>
-                <Icon name="play-circle" size={40} color="#fff" />
+                <IconF name="play-circle" size={40} color="#fff" />
               </PlayButton>
               <LessonInfo onPress={() => handleNavigation(l.id)}>
                 <LessonTitle>{l.title}</LessonTitle>

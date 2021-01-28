@@ -1,6 +1,6 @@
-<header align="center">
-  <h1><img src="src/assets/logo.png" alt="e.learning"></h1>
-</header>
+<h1 align="center">
+  <img src="src/assets/logo-background.png" alt="e.learning" />
+</h1>
 
 <p align="center">
   <a href="#about">About</a> •

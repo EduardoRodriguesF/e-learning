@@ -10,6 +10,10 @@ import logoImg from '../../assets/logo.png';
 
 import api from '../../services/api';
 
+const TabIcon = (props) => {
+  <Icon name="home" size={35} color={props.focused ? 'grey' : 'darkgray'} />
+}
+
 import {
   Container,
   Header,
@@ -40,6 +44,10 @@ const Dashboard: React.FC = () => {
   const [courses, setCourses] = useState<Course[]>([]);
 
   const navigation = useNavigation();
+
+  const navigationOptions = {
+    tabBarIcon: TabIcon
+  }
 
   const handleNavigation = useCallback((id: number) => {
     navigation.navigate('Course', { id });
@@ -81,14 +89,14 @@ const Dashboard: React.FC = () => {
           ))}
         </CoursesContainer>
       </Content>
-      <NavigationBar>
+      {/*<NavigationBar>
         <NavigationOption>
           <Icon name="home" size={20} color="#C4C4D1" /><NavigationText>Home</NavigationText>
         </NavigationOption>
         <NavigationOption>
           <Icon name="heart" size={20} color="#C4C4D1" /><NavigationText>Salvos</NavigationText>
         </NavigationOption>
-      </NavigationBar>
+      </NavigationBar>*/}
     </Container>
   )
 }

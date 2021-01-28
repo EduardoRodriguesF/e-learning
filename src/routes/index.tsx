@@ -51,7 +51,7 @@ const TabRoutes: React.FC = () => (
       },
       labelStyle: {
         fontSize: 15,
-      }
+      },
     }}
   >
     <Tab.Screen name="Dashboard" component={Dashboard} options={{ title: 'Home' }} />

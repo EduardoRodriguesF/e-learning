@@ -80,6 +80,7 @@
         {
           "id": 2,
           "title": "Leis de Newton II",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam luctus condimentum gravida. Aenean condimentum vehicula sapien, eleifend metus congue vel.\n Suspendisse vitae tellus eu lacus facilisis auctor nec tristique eros.",
           "completed": true
         },
         {
@@ -153,6 +154,50 @@
           "id": 5,
           "title": "Elétrica",
           "completed": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Inglês",
+      "cover": "",
+      "lessons": [
+        {
+          "id": 1,
+          "title": "Introdução à teoria matemática",
+          "completed": true
+        },
+        {
+          "id": 2,
+          "title": "Introdução à teoria matemática",
+          "completed": true
+        },
+        {
+          "id": 3,
+          "title": "Introdução à teoria matemática",
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Economia",
+      "cover": "",
+      "lessons": [
+        {
+          "id": 1,
+          "title": "Introdução à teoria matemática",
+          "completed": true
+        },
+        {
+          "id": 2,
+          "title": "Introdução à teoria matemática",
+          "completed": true
+        },
+        {
+          "id": 3,
+          "title": "Introdução à teoria matemática",
+          "completed": true
         }
       ]
     }

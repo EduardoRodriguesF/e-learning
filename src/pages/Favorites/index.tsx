@@ -20,6 +20,7 @@ import {
   CoursesText,
   CoursesContainer,
   CourseCard,
+  CourseInfo,
   CourseImage,
   CourseTitle,
   LessonsText,
@@ -42,13 +43,19 @@ const Favorites: React.FC = () => {
     navigation.navigate('Course', { id });
   }, [navigation]);
 
-  useEffect(() => {
-    async function loadCourses(): Promise<void> {
-      const { data } = await api.get('/favorites');
-      
-      setCourses(data);
-    }
+  const openModal = useCallback(async (id: number): Promise<void> => {
+    await api.delete(`/favorites/${id}`);
 
+    loadCourses();
+  }, []);
+
+  const loadCourses = useCallback(async (): Promise<void> => {
+    const { data } = await api.get('/favorites');
+    
+    setCourses(data);
+  }, []);
+
+  useEffect(() => {
     loadCourses();
   }, []);
 
@@ -67,12 +74,15 @@ const Favorites: React.FC = () => {
         </ContentHeader>
         <CoursesContainer>
           {courses.map(c => (
-            <CourseCard key={c.id} onPress={() => handleNavigation(c.id)} removable>
-              <CourseImage source={Maths} />
-              <View>
-                <CourseTitle>{c.title}</CourseTitle>
-                <LessonsText>{c.lessons.length} Aulas</LessonsText>
-              </View>
+            <CourseCard key={c.id}>
+              <CourseInfo onPress={() => handleNavigation(c.id)}>
+                <CourseImage source={Maths} />
+                <View>
+                  <CourseTitle>{c.title}</CourseTitle>
+                  <LessonsText>{c.lessons.length} Aulas</LessonsText>
+                </View>
+              </CourseInfo>
+              <Icon onPress={() => openModal(c.id)} name="trash" size={20} color="#C4C4D1" />
             </CourseCard>
           ))}
         </CoursesContainer>

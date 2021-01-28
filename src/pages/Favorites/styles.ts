@@ -46,11 +46,16 @@ export const CoursesContainer = styled.View`
 
 export const CourseCard = styled(RectButton)`
   flex: 1 0 40%;
+  flex-direction: row;
   height: 172px;
   background-color: #fff;
   border-radius: 16px;
   padding: 24px;
   margin: 8px;
+`;
+
+export const CourseInfo = styled.View`
+  flex: 1;
   justify-content: space-between;
 `;
 

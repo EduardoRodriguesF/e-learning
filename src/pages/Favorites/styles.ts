@@ -7,6 +7,64 @@ export const Container = styled.View`
   background-color: #6548A3;
 `;
 
+export const Modal = styled.Modal`
+  flex: 1;
+  align-items: center;
+`;
+
+export const ModalContent = styled.View`
+  width: 75%;
+  background-color: #fff;
+  align-items: center;
+  margin: auto;
+  border-radius: 16px;
+  padding: 32px;
+`;
+
+export const ModalText = styled.Text`
+  width: 152px;
+  text-align: center;
+  color: #6C6C80;
+  font-size: 15px;
+  line-height: 24px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+`;
+
+export const ModalOptions = styled.View`
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const ModalCancelButton = styled(RectButton)`
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+`;
+
+export const ModalCancelText = styled.Text`
+  color: #ff6680;
+  font-size: 15px;
+  padding: 24px;
+`;
+
+export const ModalConfirmButton = styled(RectButton)`
+  background-color: #FF6680;
+  padding: 24px;
+  height: 18px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+`;
+
+export const ModalConfirmText = styled.Text`
+  color: #fff;
+  font-size: 15px;
+`;
+
+
 export const Header = styled.View`
   width: 100%;
   padding: 32px 21px;

@@ -13,11 +13,18 @@ import Maths from '../../assets/maths.png';
 
 import {
   Container,
+  Modal,
+  ModalContent,
+  ModalText,
+  ModalOptions,
+  ModalCancelButton,
+  ModalCancelText,
+  ModalConfirmButton,
+  ModalConfirmText,
   Header,
   TopHeader,
   ContentHeader,
   Title,
-  CoursesText,
   CoursesContainer,
   CourseCard,
   CourseInfo,
@@ -36,24 +43,41 @@ interface Course {
 
 const Favorites: React.FC = () => {
   const [courses, setCourses] = useState<Course[]>([]);
+  const [selectedCourse, setSelectedCourse] = useState<Course | null>();
+  const [modalVisible, setModalVisible] = useState(false);
 
   const navigation = useNavigation();
 
   const handleNavigation = useCallback((id: number) => {
-    navigation.navigate('Course', { id });
-  }, [navigation]);
+    if (!modalVisible) navigation.navigate('Course', { id });
+  }, [navigation, modalVisible]);
 
-  const openModal = useCallback(async (id: number): Promise<void> => {
+  const openModal = useCallback((id?: number) => {
+    setModalVisible(true);
+
+    if (id) {
+      const course = courses.filter(c => c.id === id);
+      if (course) setSelectedCourse(course[0]);
+    };
+  }, [courses]);
+
+  const closeModal = useCallback(() => {
+    setModalVisible(false);
+  }, []);
+
+  const removeFavorite = useCallback(async (id: number) => {
     await api.delete(`/favorites/${id}`);
 
     loadCourses();
+
+    closeModal();
   }, []);
 
-  const loadCourses = useCallback(async (): Promise<void> => {
+  const loadCourses = useCallback(async () => {
     const { data } = await api.get('/favorites');
     
     setCourses(data);
-  }, []);
+  }, []); 
 
   useEffect(() => {
     loadCourses();
@@ -61,6 +85,24 @@ const Favorites: React.FC = () => {
 
   return (
     <Container>      
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+      >
+        <ModalContent>
+          <Icon name="trash" size={48} color="#FF6680" />
+          <ModalText>Quer excluir suas aulas de {selectedCourse && selectedCourse.title}?</ModalText>
+          <ModalOptions>
+            <ModalCancelButton>
+              <ModalCancelText onPress={() => closeModal()}>Não!</ModalCancelText>
+            </ModalCancelButton>
+            <ModalConfirmButton>
+              <ModalConfirmText onPress={() => selectedCourse && removeFavorite(selectedCourse.id)}>Com certeza</ModalConfirmText>
+            </ModalConfirmButton>
+          </ModalOptions>
+        </ModalContent>
+      </Modal>
       <Header>
         <TopHeader>
           <Image source={logoImg} />
@@ -74,8 +116,8 @@ const Favorites: React.FC = () => {
         </ContentHeader>
         <CoursesContainer>
           {courses.map(c => (
-            <CourseCard key={c.id}>
-              <CourseInfo onPress={() => handleNavigation(c.id)}>
+            <CourseCard key={c.id} onPress={() => handleNavigation(c.id)}>
+              <CourseInfo>
                 <CourseImage source={Maths} />
                 <View>
                   <CourseTitle>{c.title}</CourseTitle>

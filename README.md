@@ -36,7 +36,7 @@
 
 ### Plan to add
 
-- [ ] Functional search
+- [x] Functional search
 - [ ] Run video on lesson screen
 - [ ] Splash screen
 

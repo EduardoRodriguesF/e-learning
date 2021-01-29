@@ -35,6 +35,7 @@ interface Course {
 
 const Dashboard: React.FC = () => {
   const [courses, setCourses] = useState<Course[]>([]);
+  const [searchValue, setSearchValue] = useState('');
 
   const navigation = useNavigation();
 
@@ -44,13 +45,17 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     async function loadCourses(): Promise<void> {
-      const { data } = await api.get('/courses');
+      const { data } = await api.get('/courses', {
+        params: {
+          title_like: searchValue
+        }
+      });
       
       setCourses(data);
     }
 
     loadCourses();
-  }, []);
+  }, [searchValue]);
 
   return (
     <Container>      
@@ -59,7 +64,10 @@ const Dashboard: React.FC = () => {
           <Image source={logoImg} />
           <Icon name="power" size={24} color="#FF6680" />
         </TopHeader>
-        <SearchBox />
+        <SearchBox
+          value={searchValue}
+          onChangeText={setSearchValue}
+        />
       </Header>
       <Content>
         <ContentHeader>

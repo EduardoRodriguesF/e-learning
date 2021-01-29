@@ -178,28 +178,6 @@
           "completed": true
         }
       ]
-    },
-    {
-      "id": 5,
-      "title": "Economia",
-      "cover": "",
-      "lessons": [
-        {
-          "id": 1,
-          "title": "Introdução à teoria matemática",
-          "completed": true
-        },
-        {
-          "id": 2,
-          "title": "Introdução à teoria matemática",
-          "completed": true
-        },
-        {
-          "id": 3,
-          "title": "Introdução à teoria matemática",
-          "completed": true
-        }
-      ]
     }
   ]
 }

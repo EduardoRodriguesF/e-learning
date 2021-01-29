@@ -45,6 +45,7 @@ const Favorites: React.FC = () => {
   const [courses, setCourses] = useState<Course[]>([]);
   const [selectedCourse, setSelectedCourse] = useState<Course | null>();
   const [modalVisible, setModalVisible] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
 
   const navigation = useNavigation();
 
@@ -73,17 +74,23 @@ const Favorites: React.FC = () => {
     closeModal();
   }, []);
 
-  const loadCourses = useCallback(async () => {
-    const { data } = await api.get('/favorites');
+  async function loadCourses() {
+    // Search method makes a GET in every history entry of the Input when refreshing the screen, I don't know why.
+    const { data } = await api.get('/favorites', {
+      params: {
+        title_like: searchValue
+      }
+    });
     
     setCourses(data);
-  }, []); 
+  }
 
   useEffect(() => {
     navigation.addListener('focus', () => {
       loadCourses();
     });
-  }, [navigation]);
+    loadCourses();
+  }, [searchValue, navigation]);
 
   return (
     <Container>      
@@ -110,7 +117,10 @@ const Favorites: React.FC = () => {
           <Image source={logoImg} />
           <Icon name="power" size={24} color="#FF6680" />
         </TopHeader>
-        <SearchBox />
+        <SearchBox
+          value={searchValue}
+          onChangeText={setSearchValue}
+        />
       </Header>
       <Content>
         <ContentHeader>

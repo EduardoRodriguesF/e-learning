@@ -15,6 +15,8 @@
     "@react-navigation/bottom-tabs": "^5.11.7",
     "@react-navigation/native": "^5.9.2",
     "@react-navigation/stack": "^5.14.2",
+    "@types/react-native-video": "^5.0.3",
+    "@types/react-native-video-player": "^0.10.1",
     "@typescript-eslint/eslint-plugin": "^4.14.1",
     "axios": "^0.21.1",
     "eslint-config-airbnb": "^18.2.1",
@@ -26,6 +28,8 @@
     "react-native-screens": "^2.17.1",
     "react-native-svg": "^12.1.0",
     "react-native-vector-icons": "^8.0.0",
+    "react-native-video": "^5.1.1",
+    "react-native-video-player": "^0.10.1",
     "react-navigation": "^4.4.3",
     "styled-components": "^5.2.1"
   },

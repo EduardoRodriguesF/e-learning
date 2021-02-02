@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Image, View } from 'react-native';
+import VideoPlayer from 'react-native-video-player';
 import Icon from 'react-native-vector-icons/Feather';
 
 import logoImg from '../../assets/logo.png';
@@ -75,9 +76,10 @@ const Lesson: React.FC = () => {
         <View style={{width: 24}} />
       </Header>
       <Content>
-        <Video>
-          <Icon name="play-circle" size={64} color="#fff" />
-        </Video>
+      <VideoPlayer
+        video={{ uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' }}
+        thumbnail={{ uri: 'https://i.picsum.photos/id/866/1600/900.jpg' }}
+      />
         <LessonDetails>
           <Title>{lesson.title}</Title>
           <Info>

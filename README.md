@@ -15,7 +15,7 @@
 <p>
 <strong>e.learning</strong> is an education platform that offers courses in video format. <br />
 
-*<i> Project idea provided by Rocketseat as a reward for completing the GoStack Bootcamp, however only features ideas and a layout is given, but all the coding is done by me.</i><br />
+*<i> Project idea provided by Rocketseat as a reward for completing the GoStack Bootcamp, however all the coding was done by me.</i><br />
 </p>
 
 <h2 id="preview">Preview</h2>

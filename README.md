@@ -37,7 +37,7 @@
 ### Plan to add
 
 - [x] Functional search
-- [ ] Run video on lesson screen
+- [x] Run video on lesson screen
 - [ ] Splash screen
 
 <h2 id="techs">Technologies</h2>
